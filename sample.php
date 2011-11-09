@@ -16,3 +16,4 @@ $json = MashapeAutoloader::Unshortener ($publicKey, $privateKey)->unshort ("http
 MashapeAutoloader::auth ($publicKey, $privateKey);
 $json2 = MashapeAutoloader::exec ("Unshortener", "unshort", "http://wp.me/p1e4Gf-6r");
 
+var_dump ($json, $json2);
