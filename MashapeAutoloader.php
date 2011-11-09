@@ -57,7 +57,7 @@ abstract class MashapeAutoloader
 		{
 			$apiFilePath = self::$apiStore. "mashape-{$apiName}/{$apiName}.php";
 			if (!self::downloadLib ($apiName)) // check for already existance is inherent in this call
-				throw new Exception ("requested lib doesn't exist or not downloadable ({$apiName})");
+				return null;
 
 			require_once $apiFilePath;
 
