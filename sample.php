@@ -7,7 +7,7 @@ $privateKey = "your-private-key";
 
 
 // set local store dir
-MashapeAutoloader::store ("../../data/mashape-apis/");
+MashapeAutoloader::store ("mashape-apis/");
 
 // first way
 $json = MashapeAutoloader::Unshortener ($publicKey, $privateKey)->unshort ("http://wp.me/p1e4Gf-6r");
