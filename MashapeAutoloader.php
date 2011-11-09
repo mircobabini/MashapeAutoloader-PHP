@@ -1,6 +1,6 @@
 <?
 /*
- * Mashape APIs' Autoloader library.
+ * core of Mashape APIs' Autoloader library package.
  *
  * Copyright (C) 2011 mirkolofio.
  *
@@ -27,6 +27,8 @@
  * Some infos about this lib: http://wp.me/p1e4Gf-6r
  */
 require_once (dirname (__FILE__) . "/MashapeClient/MashapeClient.php");
+require_once (dirname (__FILE__) . "/MashapeAnonymous.php");
+require_once (dirname (__FILE__) . "/tools.php");
 abstract class MashapeAutoloader
 {
 	const MASHAPE_DOWNLOAD_ROOT = "http://www.mashape.com/apis/download-php-client?componentName=";
@@ -56,8 +58,8 @@ abstract class MashapeAutoloader
 		if (!isset (self::$instances[ $apiName ]))
 		{
 			$apiFilePath = self::$apiStore. "mashape-{$apiName}/{$apiName}.php";
-			if (!self::downloadLib ($apiName)) // check for already existance is inherent in this call
-				return null;
+			if (!self::downloadLib ($apiName))
+				return new MashapeAnonymous (); // in order to avoid fatal error or exception
 
 			require_once $apiFilePath;
 
@@ -127,6 +129,7 @@ abstract class MashapeAutoloader
 		$fileName = "{$name}.php";
 		$content = @file_get_contents ($fileName);
 		$content = str_replace ("require_once(\"mashape/MashapeClient.php\");\n", "", $content);
+		$content = str_replace ("class {$name}", "class {$name} extends MashapeAnonymous", $content);
 		$content = str_replace ("?>", "", $content);
 
 		// save result
