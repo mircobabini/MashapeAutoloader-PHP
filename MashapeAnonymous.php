@@ -30,6 +30,6 @@ class MashapeAnonymous
 {
 	function __call ($name, $arguments)
 	{
-		return (isset ($this->$name)) ? call_user_func_array ($this->$name, $arguments) : null;
+		throw new BadMethodCallException ();
 	}
 }
